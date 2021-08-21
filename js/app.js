@@ -12,7 +12,7 @@ const chrageShipping = document.querySelector(".charge-shipping");
 /*================================== 
 My All Promo Input References
 ====================================*/
-const promoInput = document.querySelector(".promo-input");
+const promoInput = document.querySelector(".promo-field");
 const promoBtn = document.querySelector(".promo-btn");
 
 /*================================== 
@@ -63,7 +63,22 @@ function getMoney(myBtn, innerContent) {
 
   let subtotal = bestfirstPrice + myInputValues;
   totalCost.innerHTML = subtotal;
+  totalMainCost.innerHTML = subtotal;
 }
+
+// Discounted Price calculation
+
+function calcDiscount(subtotal) {
+  let promoCode = "stevekaku";
+  if (promoInput.value == promoCode) {
+    let discountCount = (subtotal * 20) / 100;
+    let currPrice = subtotal - discountCount;
+    totalMainCost.innerHTML = currPrice;
+    promoInput.value = "";
+  }
+}
+
+// All Buttons
 
 eightGbBtn.addEventListener("click", function () {
   getMoney(eightGbBtn, extraMemory);
@@ -73,7 +88,7 @@ sixteenGbBtn.addEventListener("click", function () {
   getMoney(sixteenGbBtn, extraMemory);
 });
 
-// SSD
+// SSD Buttons
 
 fiftySixGbSsd.addEventListener("click", function () {
   getMoney(fiftySixGbSsd, extraStorage);
@@ -97,30 +112,8 @@ chrageShipping.addEventListener("click", function () {
   getMoney(chrageShipping, deliveryCharge);
 });
 
-// eightGbBtn.addEventListener("click", function () {
-//   let eightMemoPrice = 0;
-//   extraMemory.innerHTML = eightMemoPrice;
-// });
-
-// sixteenGbBtn.addEventListener("click", function () {
-//   let SixMemoPrice = 180;
-//   extraMemory.innerHTML = SixMemoPrice;
-// });
-
-// /*==================================
-// SSd Price here
-// ====================================*/
-// fiftySixGbSsd.addEventListener("click", function () {
-//   let SixGbSSd = 0;
-//   extraStorage.innerHTML = SixGbSSd;
-// });
-
-// fiftyTwoSsd.addEventListener("click", function () {
-//   let TwoSsd = 100;
-//   extraStorage.innerHTML = TwoSsd;
-// });
-
-// oneTbSsd.addEventListener("click", function () {
-//   let oneTb = 180;
-//   extraStorage.innerHTML = oneTb;
-// });
+// Apply discount Event
+promoBtn.addEventListener("click", function () {
+  let totalMoney = Number(totalCost.innerHTML);
+  calcDiscount(totalMoney);
+});
