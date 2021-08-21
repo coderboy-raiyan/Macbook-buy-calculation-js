@@ -1,3 +1,25 @@
+/*===============
+Mobile devices
+===========================*/
+
 .inner-image {
+  margin: auto;
   width: 85%;
+  margin-bottom: 45px;
+}
+.list-items {
+  width: 50%;
+}
+
+.promo-field {
+  width: 40%;
+}
+
+@media only screen and (max-width: 768px) {
+  .list-items {
+    width: 100%;
+  }
+  .promo-field {
+    width: 100%;
+  }
 }
